@@ -17,7 +17,7 @@ MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../src/orz/mem/*.cpp)
 
 MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../src/orz/net/*.cpp)
 
-MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../src/orz/ssl/*.cpp)
+#MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../src/orz/ssl/*.cpp)
 
 MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../src/orz/sync/*.cpp)
 
