@@ -4,6 +4,8 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := ORZ_static
 
+LOCAL_CFLAGS = -DORZ_PLATFORM_OS_ANDROID=ON
+
 MY_CPP_LIST := $(wildcard $(LOCAL_PATH)/../src/*.cpp)
 MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../src/orz/*.cpp)
 MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../src/orz/codec/*.cpp)
