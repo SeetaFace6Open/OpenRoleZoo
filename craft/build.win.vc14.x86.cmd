@@ -7,7 +7,7 @@ set "PLATFORM_TARGET=x86"
 
 set "WITH_SSL=OFF"
 
-set "INSTALL_DIR=../build"
+set "INSTALL_DIR=../../../build"
 
 call "%VS140COMNTOOLS%..\..\VC\vcvarsall.bat" %PLATFORM%
 
