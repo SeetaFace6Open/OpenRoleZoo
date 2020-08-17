@@ -4,9 +4,9 @@ export BUILD_DIR=build.linux.x64
 export BUILD_TYPE=Release
 export PLATFORM_TARGET=x64
 
-export WITH_SSL=ON
+export WITH_SSL=OFF
 
-export INSTALL_DIR=/usr/local
+export INSTALL_DIR=../../build
 
 HOME=$(cd `dirname $0`; pwd)
 
