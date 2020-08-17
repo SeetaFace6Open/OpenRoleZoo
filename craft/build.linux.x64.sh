@@ -6,7 +6,7 @@ export PLATFORM_TARGET=x64
 
 export WITH_SSL=OFF
 
-export INSTALL_DIR=$(cd "$(dirname "$0")"; pwd) /../../build
+export INSTALL_DIR=$(cd "$(dirname "$0")"; pwd)/../../build
 
 HOME=$(cd `dirname $0`; pwd)
 
