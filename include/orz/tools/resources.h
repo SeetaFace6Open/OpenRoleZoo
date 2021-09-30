@@ -9,11 +9,12 @@
 #include <vector>
 #include <istream>
 #include <ostream>
+#include "orz_export.h"
 
 namespace orz {
 
     namespace resources {
-        struct resources {
+        struct ORZ_EXPORT resources {
         public:
             resources() = default;
             explicit resources(const std::string &url, const std::string &path, size_t line = 0)
@@ -24,7 +25,7 @@ namespace orz {
             std::string path;
         };
 
-        class compiler {
+        class ORZ_EXPORT compiler {
         public:
             static const char annotation = '#';
 

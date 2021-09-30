@@ -8,9 +8,10 @@
 #include <cstddef>
 #include <memory>
 #include <string>
+#include "orz_export.h"
 
 namespace orz {
-    class binary {
+    class ORZ_EXPORT binary {
     public:
         using self = binary;
 
@@ -103,13 +104,13 @@ namespace orz {
         const void *now_data() const;
     };
 
-    std::string to_string(const binary &str);
+    ORZ_EXPORT std::string to_string(const binary &str);
 
-    binary to_binary(const std::string &bin);
+    ORZ_EXPORT binary to_binary(const std::string &bin);
 
-    bool operator==(const binary &lhs, const binary &rhs);
+    ORZ_EXPORT bool operator==(const binary &lhs, const binary &rhs);
 
-    bool operator!=(const binary &lhs, const binary &rhs);
+    ORZ_EXPORT bool operator!=(const binary &lhs, const binary &rhs);
 }
 
 

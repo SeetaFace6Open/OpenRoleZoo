@@ -3,6 +3,7 @@
 
 #include "orz/io/stream/stream.h"
 #include <memory>
+#include "orz_export.h"
 
 namespace orz {
 
@@ -11,7 +12,7 @@ namespace orz {
  * A FilterInputStream contains some other input stream, which it uses as its basic
  * source of data, possibly transforming the data along the way or providing additional functionality.
  */
-class FilterInputStream : public InputStream {
+class ORZ_EXPORT FilterInputStream : public InputStream {
 public:
     /**
     * reads up to len char of data from this input stream into a char array. 
@@ -46,7 +47,7 @@ protected:
  * as its basic sink of data, buf possibly transforming the data along the way
  * or providing additional functionality. 
  */
-class FilterOutputStream : public OutputStream {
+class ORZ_EXPORT FilterOutputStream : public OutputStream {
 public:
     /**
     @param buf, Pointer to an array of at least len characters.. 

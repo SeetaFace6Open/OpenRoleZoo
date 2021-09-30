@@ -9,6 +9,7 @@
 #include <sstream>
 
 #include "orz/utils/except.h"
+#include "orz_export.h"
 
 #if defined(_MSC_VER) && _MSC_VER < 1900 // lower then VS2015
 #    define ORZ_LITE_THREAD_LOCAL __declspec(thread)
@@ -17,7 +18,7 @@
 #endif
 
 namespace orz {
-    class NoLiteContextException : public Exception {
+    class ORZ_EXPORT NoLiteContextException : public Exception {
     public:
         NoLiteContextException()
                 : NoLiteContextException(std::this_thread::get_id()) {

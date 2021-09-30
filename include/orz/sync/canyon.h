@@ -14,10 +14,11 @@
 #include <future>
 
 #include "orz/tools/void_bind.h"
+#include "orz_export.h"
 
 namespace orz {
 
-    class Canyon {
+    class ORZ_EXPORT Canyon {
     public:
         enum Action {
             DISCARD,

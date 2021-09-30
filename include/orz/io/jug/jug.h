@@ -7,6 +7,7 @@
 
 #include "piece.h"
 #include <cstddef>
+#include "orz_export.h"
 
 namespace orz {
 
@@ -15,7 +16,7 @@ namespace orz {
     /*
      * @brief interface of piece
      */
-    class jug {
+    class ORZ_EXPORT jug {
     public:
         using self = jug;
 
@@ -205,50 +206,50 @@ namespace orz {
         std::shared_ptr<Piece> m_pie;
 
     public:
-        friend std::ostream &operator<<(std::ostream &out, const jug &e);
+        ORZ_EXPORT friend std::ostream &operator<<(std::ostream &out, const jug &e);
 
-        friend jug jug_parse(const std::string &buffer);
+        ORZ_EXPORT friend jug jug_parse(const std::string &buffer);
 
-        friend std::string jug_build(const jug &j);
+        ORZ_EXPORT friend std::string jug_build(const jug &j);
 
-        friend jug jug_read(const std::string &filename);
+        ORZ_EXPORT friend jug jug_read(const std::string &filename);
 
-        friend jug jug_read(std::istream &in);
+        ORZ_EXPORT friend jug jug_read(std::istream &in);
 
-        friend bool jug_write(const std::string &filename, const jug &j);
+        ORZ_EXPORT friend bool jug_write(const std::string &filename, const jug &j);
 
-        friend void jug_write(std::ostream &out, const jug &j);
+        ORZ_EXPORT friend void jug_write(std::ostream &out, const jug &j);
 
-        friend jug sta_read(const std::string &filename, int mask);
+        ORZ_EXPORT friend jug sta_read(const std::string &filename, int mask);
 
-        friend jug sta_read(std::istream &in, int mask);
+        ORZ_EXPORT friend jug sta_read(std::istream &in, int mask);
 
-        friend bool sta_write(const std::string &filename, const jug &j, int mask);
+        ORZ_EXPORT friend bool sta_write(const std::string &filename, const jug &j, int mask);
 
-        friend void sta_write(std::ostream &out, const jug &j, int mask);
+        ORZ_EXPORT friend void sta_write(std::ostream &out, const jug &j, int mask);
     };
 
-    std::ostream &operator<<(std::ostream &out, const jug &e);
+    ORZ_EXPORT std::ostream &operator<<(std::ostream &out, const jug &e);
 
-    jug jug_parse(const std::string &buffer);
+    ORZ_EXPORT jug jug_parse(const std::string &buffer);
 
-    std::string jug_build(const jug &j);
+    ORZ_EXPORT std::string jug_build(const jug &j);
 
-    jug jug_read(const std::string &filename);
+    ORZ_EXPORT jug jug_read(const std::string &filename);
 
-    jug jug_read(std::istream &in);
+    ORZ_EXPORT jug jug_read(std::istream &in);
 
-    bool jug_write(const std::string &filename, const jug &j);
+    ORZ_EXPORT bool jug_write(const std::string &filename, const jug &j);
 
-    void jug_write(std::ostream &out, const jug &j);
+    ORZ_EXPORT void jug_write(std::ostream &out, const jug &j);
 
-    jug sta_read(const std::string &filename, int mask = STA_MASK);
+    ORZ_EXPORT jug sta_read(const std::string &filename, int mask = STA_MASK);
 
-    jug sta_read(std::istream &in, int mask = STA_MASK);
+    ORZ_EXPORT jug sta_read(std::istream &in, int mask = STA_MASK);
 
-    bool sta_write(const std::string &filename, const jug &j, int mask = STA_MASK);
+    ORZ_EXPORT bool sta_write(const std::string &filename, const jug &j, int mask = STA_MASK);
 
-    void sta_write(std::ostream &out, const jug &j, int mask = STA_MASK);
+    ORZ_EXPORT void sta_write(std::ostream &out, const jug &j, int mask = STA_MASK);
 
     template<typename T>
     T jug_get(const jug &j, const T &def = T()) {
@@ -259,7 +260,7 @@ namespace orz {
         }
     }
 
-    std::string to_string(const jug& obj);
+    ORZ_EXPORT std::string to_string(const jug& obj);
 }
 
 

@@ -5,8 +5,10 @@
 #ifndef ORZ_UTILS_RANDOM_H
 #define ORZ_UTILS_RANDOM_H
 
+#include "orz_export.h"
+
 namespace orz {
-    class MT19937 {
+    class ORZ_EXPORT MT19937 {
     public:
         MT19937();
 
@@ -24,7 +26,7 @@ namespace orz {
         int m_seed;
     };
 
-    class Random {
+    class ORZ_EXPORT Random {
     public:
 
         Random();

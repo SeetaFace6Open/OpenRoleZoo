@@ -4,6 +4,7 @@
 #include "orz/io/stream/stream.h"
 #include <memory>
 #include <string>
+#include "orz_export.h"
 
 namespace orz {
 
@@ -13,7 +14,7 @@ namespace orz {
  * An internal counter keeps track of the char to be supplied by the read method
  */
 
-class MemoryInputStream : public InputStream {
+class ORZ_EXPORT MemoryInputStream : public InputStream {
 public:
     /**
     * @param buf, Pointer to an array where the read characters are stored. 
@@ -62,7 +63,7 @@ protected:
  * This clas implements an output stream in which the data is written into a char array.
  * The buffer automatically grows as data is written to it.
  */
-class MemoryOutputStream : public OutputStream {
+class ORZ_EXPORT MemoryOutputStream : public OutputStream {
 public:
     /**
      * @param buf, Pointer to an array of at least len characters.. 

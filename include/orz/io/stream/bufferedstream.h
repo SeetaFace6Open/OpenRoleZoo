@@ -3,13 +3,14 @@
 
 #include "orz/io/stream/filterstream.h"
 #include <memory>
+#include "orz_export.h"
 
 namespace orz {
 
 /**
  * the ability to buffer the input stream
  */
-class BufferedInputStream : public FilterInputStream {
+class ORZ_EXPORT BufferedInputStream : public FilterInputStream {
 public:
     /**
     * @param buf, Pointer to an array where the read characters are stored. 
@@ -51,7 +52,7 @@ private:
 /**
  * the ability to buffer the output stream
  */
-class BufferedOutputStream : public FilterOutputStream {
+class ORZ_EXPORT BufferedOutputStream : public FilterOutputStream {
 private:
     /**
      * Flushes this buffered output stream.

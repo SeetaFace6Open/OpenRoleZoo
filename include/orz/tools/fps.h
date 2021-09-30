@@ -8,9 +8,10 @@
 #include <chrono>
 #include <deque>
 #include <cmath>
+#include "orz_export.h"
 
 namespace orz {
-    class FPS {
+    class ORZ_EXPORT FPS {
     public:
         using system_clock = std::chrono::system_clock;
         using time_point = decltype(system_clock::now());

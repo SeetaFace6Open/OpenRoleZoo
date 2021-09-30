@@ -8,6 +8,7 @@
 #include <chrono>
 #include <string>
 #include <iostream>
+#include "orz_export.h"
 
 namespace orz {
     using system_clock = std::chrono::system_clock;
@@ -19,7 +20,7 @@ namespace orz {
 
     std::string to_string(microseconds us, size_t limit = 8);
 
-    class progress_bar {
+    class ORZ_EXPORT progress_bar {
     public:
         using self = progress_bar;
 

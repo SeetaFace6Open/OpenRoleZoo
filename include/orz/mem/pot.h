@@ -7,10 +7,11 @@
 
 #include <mutex>
 #include <memory>
+#include "orz_export.h"
 
 namespace orz {
 
-    class Pot {
+    class ORZ_EXPORT Pot {
     public:
         using allocator = std::function<std::shared_ptr<void>(size_t)>;
 

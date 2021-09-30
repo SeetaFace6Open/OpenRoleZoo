@@ -8,10 +8,11 @@
 #include "pot.h"
 #include <vector>
 #include <map>
+#include "orz_export.h"
 
 namespace orz {
 
-    class Vat {
+    class ORZ_EXPORT Vat {
     public:
         Vat();
 

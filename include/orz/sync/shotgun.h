@@ -5,13 +5,14 @@
 
 #include <vector>
 #include <deque>
+#include "orz_export.h"
 
 namespace orz {
 
 /**
  * @brief The Shotgun class the thread pool
  */
-    class Shotgun {
+    class ORZ_EXPORT Shotgun {
     public:
         /**
          * @brief Shotgun

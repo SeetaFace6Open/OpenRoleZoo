@@ -11,7 +11,6 @@ option(ORZ_INSTALL "Supporting install script" ON)
 
 # global root dir
 set(SOLUTION_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-add_definitions(-DORZ_SOLUTION_DIR="${SOLUTION_DIR}")
 
 # dir for common cmake files
 list(APPEND CMAKE_MODULE_PATH ${SOLUTION_DIR}/cmake)
@@ -37,21 +36,17 @@ if (LOCAL_OUTPUT_DIR)
 endif ()
 
 add_subdirectory(src)
-return()
 
 # project files for clion
 #FILE(GLOB_RECURSE TEST_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 FILE(GLOB_RECURSE TOOL_FILES ${PROJECT_SOURCE_DIR}/tools/*.cpp)
-
-include_directories(${PROJECT_SOURCE_DIR}/include)
-find_package(SeetaFace6 COMPONENTS ORZ REQUIRED)
 
 foreach (path ${TEST_FILES})
     string(REGEX MATCH "[^/]*.[(c)|(cc)|(cpp)]$" file_ext ${path})
     string(REGEX MATCH "^[^.]*" file ${file_ext})
     add_executable(test_${file} ${path})
     set_target_properties(test_${file} PROPERTIES OUTPUT_NAME test_${file}${ENV_SUFFIX})
-    target_link_libraries(test_${file} SeetaFace6::ORZ)
+    target_link_libraries(test_${file} ORZ)
     # set_target_properties(test_${file} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LOCAL_OUTPUT_DIR}/lib)
 endforeach ()
 
@@ -60,7 +55,7 @@ foreach (path ${TOOL_FILES})
     string(REGEX MATCH "^[^.]*" file ${file_ext})
     add_executable(tool_${file} ${path})
     set_target_properties(tool_${file} PROPERTIES OUTPUT_NAME ${file}${ENV_SUFFIX})
-    target_link_libraries(tool_${file} SeetaFace6::ORZ)
+    target_link_libraries(tool_${file} ORZ)
     install(TARGETS tool_${file}
 		RUNTIME DESTINATION ${ENV_RUNTIME_DIR}
 	)
