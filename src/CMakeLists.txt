@@ -38,9 +38,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${ORZ_SOURCE_DIR}/include>
     $<BUILD_INTERFACE:${ORZ_SOURCE_DIR}/src>
     $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>)
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    PUBLIC_HEADER "${ORZ_INCLUDE_FILES}" # Install head files
-    )
 if (ORZ_WITH_OPENSSL)
     message(STATUS "Build with OpenSSL")
 	find_package(OpenSSL REQUIRED)
@@ -81,6 +78,7 @@ install(TARGETS
         COMPONENT Runtime
     ARCHIVE DESTINATION ${ENV_ARCHIVE_DIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/orz
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
 
 # Install cmake configure files
@@ -96,3 +94,5 @@ write_basic_package_version_file(
     COMPATIBILITY AnyNewerVersion)
 install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/SeetaFace6")
+install(DIRECTORY ${ORZ_SOURCE_DIR}/include/
+    DESTINATION ${ENV_HEADER_DIR})
