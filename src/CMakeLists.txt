@@ -20,6 +20,11 @@ set(ORZ_INCLUDE_FILES)
 set(ORZ_SRC_FILES)
 set(ORZ_SRC_INCLUDE_FILES)
 
+# For debug libs and exes, add "_d" postfix
+if(NOT DEFINED CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX "_d")
+endif()
+
 foreach (module ${ORZ_MODULES})
     FILE(GLOB_RECURSE ORZ_INCLUDE_${module}_FILES ${ORZ_SOURCE_DIR}/include/orz/${module}/*.h)
     LIST(APPEND ORZ_INCLUDE_FILES ${ORZ_INCLUDE_${module}_FILES})
