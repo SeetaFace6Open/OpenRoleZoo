@@ -1,5 +1,7 @@
 # OpenRoleZoo
 
+[![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
+
 原 OpenRoleCraft 项目搁置，换名 OpenRoleZoo 启动。
 
 ## 文件结构
