@@ -10,11 +10,11 @@
 #include <istream>
 
 namespace orz {
-    binary read_file(const std::string &filename);
+    ORZ_EXPORT binary read_file(const std::string &filename);
 
-    std::string read_txt_file(const std::string &filename);
+    ORZ_EXPORT std::string read_txt_file(const std::string &filename);
 
-    class imemorystream : public std::istream {
+    class ORZ_EXPORT imemorystream : public std::istream {
     public:
         imemorystream(const void *data, size_t size);
 
@@ -46,7 +46,7 @@ namespace orz {
         imemorybuffer m_buffer;
     };
 
-    class MemoryFILE {
+    class ORZ_EXPORT MemoryFILE {
     public:
         using self = MemoryFILE;
 

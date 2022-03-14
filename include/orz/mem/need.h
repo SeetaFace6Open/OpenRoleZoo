@@ -6,10 +6,11 @@
 #define ORZ_MEM_NEED_H
 
 #include "orz/tools/void_bind.h"
+#include "orz_export.h"
 
 namespace orz {
 
-    class need {
+    class ORZ_EXPORT need {
     public:
 
         template<typename FUNC>

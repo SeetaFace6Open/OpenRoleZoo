@@ -6,10 +6,11 @@
 #include <condition_variable>
 #include <atomic>
 #include <thread>
+#include "orz_export.h"
 
 namespace orz {
 
-    class Cartridge {
+    class ORZ_EXPORT Cartridge {
     public:
         Cartridge();
 

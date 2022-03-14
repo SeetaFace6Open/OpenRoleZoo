@@ -9,6 +9,7 @@
 #include <sstream>
 #include <vector>
 #include <chrono>
+#include "orz_export.h"
 
 #ifndef UNUSED
 #define UNUSED(val) (void)(val)
@@ -29,13 +30,13 @@ namespace orz {
         return oss.str();
     }
 
-    const std::string Format(const std::string &f);
+    ORZ_EXPORT const std::string Format(const std::string &f);
 
-    std::vector<std::string> Split(const std::string &str, char ch = ' ', size_t _size = 0);
+    ORZ_EXPORT std::vector<std::string> Split(const std::string &str, char ch = ' ', size_t _size = 0);
 
-    std::vector<std::string> Split(const std::string &str, const std::string sep = " ", size_t _size = 0);
+    ORZ_EXPORT std::vector<std::string> Split(const std::string &str, const std::string sep = " ", size_t _size = 0);
 
-    std::string Join(const std::vector<std::string> &list, const std::string &sep);
+    ORZ_EXPORT std::string Join(const std::vector<std::string> &list, const std::string &sep);
 
     template<typename T>
     static inline std::ostream &operator<<(std::ostream &out, const std::vector<T> &vec) {
@@ -48,7 +49,7 @@ namespace orz {
         return out;
     }
 
-    std::string to_string(time_point tp, const std::string &format = "%Y-%m-%d %H:%M:%S");
+    ORZ_EXPORT std::string to_string(time_point tp, const std::string &format = "%Y-%m-%d %H:%M:%S");
 
     /**
      * return format now time string
@@ -56,7 +57,7 @@ namespace orz {
      * @return string contains now time
      * @see strftime
      */
-    std::string now_time(const std::string &format = "%Y-%m-%d %H:%M:%S");
+    ORZ_EXPORT std::string now_time(const std::string &format = "%Y-%m-%d %H:%M:%S");
 }
 
 #endif //ORZ_UTILS_FORMAT_H

@@ -2,6 +2,7 @@
 #define ORZ_IO_STREAM_STREAM_H
 
 #include <stdint.h>
+#include "orz_export.h"
 
 namespace orz {
 
@@ -9,7 +10,7 @@ namespace orz {
  *This abstract class is the superclass of all classes representing an input stream of bytes.
  */
 
-class InputStream {
+class ORZ_EXPORT InputStream {
 public:
 
     /**
@@ -27,7 +28,7 @@ public:
 };
 
 
-class OutputStream {
+class ORZ_EXPORT OutputStream {
 public:
 
     /**

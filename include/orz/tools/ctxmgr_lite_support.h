@@ -6,6 +6,7 @@
 #define ORZ_TOOLS_CTXMGR_LITE_SUPPORT_HPP
 
 #include "ctxmgr_lite.h"
+#include "orz_export.h"
 
 namespace orz {
 

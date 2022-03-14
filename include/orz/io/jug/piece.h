@@ -6,6 +6,7 @@
 #define ORZ_IO_JUG_PIECE_H
 
 #include "orz/utils/except.h"
+#include "orz_export.h"
 
 #include <iostream>
 #include <memory>
@@ -17,7 +18,7 @@
 
 namespace orz {
 
-    class Piece {
+    class ORZ_EXPORT Piece {
     public:
         using self = Piece;
 
@@ -207,7 +208,7 @@ namespace orz {
         T m_val;
     };
 
-    class NilPiece : public ValuedPiece<Piece::NIL, char> {
+    class ORZ_EXPORT NilPiece : public ValuedPiece<Piece::NIL, char> {
     public:
         using supper = ValuedPiece<Piece::NIL, char>;
         using self = NilPiece;
@@ -235,7 +236,7 @@ namespace orz {
 
     using FloatPiece = ValuedPiece<Piece::FLOAT, float>;
 
-    class StringPiece : public ValuedPiece<Piece::STRING, std::string> {
+    class ORZ_EXPORT StringPiece : public ValuedPiece<Piece::STRING, std::string> {
     public:
         using supper = ValuedPiece<Piece::STRING, std::string>;
         using self = StringPiece;
@@ -254,7 +255,7 @@ namespace orz {
     };
 
     // using BinaryPiece = ValuedPiece<Piece::BINARY, std::string>;
-    class BooleanPiece : public ValuedPiece<Piece::BOOLEAN, char> {
+    class ORZ_EXPORT BooleanPiece : public ValuedPiece<Piece::BOOLEAN, char> {
     public:
         using supper = ValuedPiece<Piece::BOOLEAN, char>;
         using self = BooleanPiece;
@@ -278,7 +279,7 @@ namespace orz {
         }
     };
 
-    class BinaryPiece : public TypedPiece<Piece::BINARY> {
+    class ORZ_EXPORT BinaryPiece : public TypedPiece<Piece::BINARY> {
     public:
         BinaryPiece() : m_buff() {}
 
@@ -367,7 +368,7 @@ namespace orz {
         binary m_buff;
     };
 
-    class ListPiece : public TypedPiece<Piece::LIST> {
+    class ORZ_EXPORT ListPiece : public TypedPiece<Piece::LIST> {
     public:
         ListPiece() {}
 
@@ -459,7 +460,7 @@ namespace orz {
         std::vector<std::shared_ptr<Piece>> m_list;
     };
 
-    class DictPiece : public TypedPiece<Piece::DICT> {
+    class ORZ_EXPORT DictPiece : public TypedPiece<Piece::DICT> {
     public:
         DictPiece() {}
 
@@ -578,21 +579,21 @@ namespace orz {
         std::map<std::string, std::shared_ptr<Piece>> m_dict;
     };
 
-    void Piece::Write(std::ostream &bin, const Piece &pie) {
+    ORZ_EXPORT void Piece::Write(std::ostream &bin, const Piece &pie) {
         pie.write(bin);
     }
 
-    void Piece::Write(std::ostream &bin, const std::shared_ptr<Piece> &pie) {
+    ORZ_EXPORT void Piece::Write(std::ostream &bin, const std::shared_ptr<Piece> &pie) {
         pie.get()->write(bin);
     }
 
-    std::shared_ptr<Piece> Piece::Read(std::istream &bin) {
+    ORZ_EXPORT std::shared_ptr<Piece> Piece::Read(std::istream &bin) {
         char type;
         binio<char>::read(bin, type);
         return Get(static_cast<Type>(type), bin);
     }
 
-    std::shared_ptr<Piece> Piece::Get(Type type) {
+    ORZ_EXPORT std::shared_ptr<Piece> Piece::Get(Type type) {
         switch (static_cast<Type>(type)) {
             case NIL:
                 return std::make_shared<NilPiece>();
@@ -614,7 +615,7 @@ namespace orz {
         throw Exception("Unknown piece type.");
     }
 
-    std::shared_ptr<Piece> Piece::Get(Type type, std::istream &bin) {
+    ORZ_EXPORT std::shared_ptr<Piece> Piece::Get(Type type, std::istream &bin) {
         auto pie = Get(type);
         pie->read(bin);
         return std::move(pie);

@@ -4,13 +4,14 @@
 #include "orz/io/stream/stream.h"
 #include <fstream>
 #include <string>
+#include "orz_export.h"
 
 namespace orz {
 
 /**
  * A FileInputStream obtains input bytes from a file
  */
-class FileInputStream : public InputStream {
+class ORZ_EXPORT FileInputStream : public InputStream {
 public:
     /**
     * @param buf, Pointer to an array where the read characters are stored. 
@@ -61,7 +62,7 @@ private:
 /**
  * A FileOutputStream is an output stream for writing data to a file 
  */
-class FileOutputStream : public OutputStream {
+class ORZ_EXPORT FileOutputStream : public OutputStream {
 public:
     /**
     @param buf, Pointer to an array of at least len characters.. 

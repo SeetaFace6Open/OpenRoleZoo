@@ -7,10 +7,11 @@
 
 #include <string>
 #include <vector>
+#include "orz_export.h"
 
 namespace orz {
     namespace resources {
-        class BinaryFileInfo {
+        class ORZ_EXPORT BinaryFileInfo {
         public:
             int line = 0;
             std::string url;
@@ -18,13 +19,13 @@ namespace orz {
             std::string root;
         };
 
-        class OutputFileInfo {
+        class ORZ_EXPORT OutputFileInfo {
         public:
             std::string path;
             std::string root;
         };
 
-        class CPPCompiler {
+        class ORZ_EXPORT CPPCompiler {
         public:
             static const char annotation;
             static const char *const header_name;

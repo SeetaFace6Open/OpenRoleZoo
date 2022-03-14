@@ -10,6 +10,7 @@
 #include "format.h"
 #include "except.h"
 #include <cstring>
+#include "orz_export.h"
 
 #undef NONE
 #undef DEBUG
@@ -53,7 +54,7 @@ namespace orz {
     }
 #endif
 
-    extern LogLevel InnerGlobalLogLevel;
+    ORZ_EXPORT extern LogLevel InnerGlobalLogLevel;
 
     inline LogLevel GlobalLogLevel(LogLevel level) {
         LogLevel pre_level = InnerGlobalLogLevel;
@@ -65,7 +66,7 @@ namespace orz {
         return InnerGlobalLogLevel;
     }
 
-    class Log {
+    class ORZ_EXPORT Log {
     public:
         Log(LogLevel level, std::ostream &log = std::cout)
                 : m_level(level), m_log(log) {

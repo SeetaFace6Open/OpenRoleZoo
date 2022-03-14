@@ -9,7 +9,7 @@
 
 namespace orz
 {
-    orz::jug json2jug(const std::string &json);
+    ORZ_EXPORT orz::jug json2jug(const std::string &json);
     /**
      *
      * @param json
@@ -17,9 +17,9 @@ namespace orz
      * @return
      * Note: root work with root change
      */
-    orz::jug json2jug(const std::string &json, const std::string &root);
-    std::string jug2json(const orz::jug &obj);
-    std::string form_encode(const orz::jug &obj);
+    ORZ_EXPORT orz::jug json2jug(const std::string &json, const std::string &root);
+    ORZ_EXPORT std::string jug2json(const orz::jug &obj);
+    ORZ_EXPORT std::string form_encode(const orz::jug &obj);
 }
 
 

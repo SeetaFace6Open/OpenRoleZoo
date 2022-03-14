@@ -9,6 +9,7 @@
 #include <string>
 
 #include "platform.h"
+#include "orz_export.h"
 
 #if ORZ_PLATFORM_CC_MSVC
 #define ORZ_NOEXCEPT
@@ -17,7 +18,7 @@
 #endif
 
 namespace orz {
-    class Exception : public std::exception {
+    class ORZ_EXPORT Exception : public std::exception {
     public:
         Exception(const std::string &message);
 

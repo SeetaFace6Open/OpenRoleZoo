@@ -1,11 +1,14 @@
+#
+# Author: Kang Lin <kl222@126.com>
+# Date  : 2021-09-29
+#
+
+cmake_minimum_required(VERSION 2.8)
+
 project(ORZ)
 
-set(ORZ_SOURCE_DIR ${PROJECT_SOURCE_DIR}/..)
-
+set(ORZ_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 option(ORZ_WITH_OPENSSL "Supporting AES, RAS and SSL with OpenSSL" OFF)
-
-include_directories(${ORZ_SOURCE_DIR}/include)
-include_directories(${ORZ_SOURCE_DIR}/src)
 
 set(ORZ_MODULES codec io lego mem net sync tools utils)
 
@@ -16,6 +19,11 @@ endif (ORZ_WITH_OPENSSL)
 set(ORZ_INCLUDE_FILES)
 set(ORZ_SRC_FILES)
 set(ORZ_SRC_INCLUDE_FILES)
+
+# For debug libs and exes, add "_d" postfix
+if(NOT DEFINED CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX "_d")
+endif()
 
 foreach (module ${ORZ_MODULES})
     FILE(GLOB_RECURSE ORZ_INCLUDE_${module}_FILES ${ORZ_SOURCE_DIR}/include/orz/${module}/*.h)
@@ -30,48 +38,67 @@ endforeach ()
 
 set(ORZ_INCLUDE_DIR ${ORZ_SOURCE_DIR}/include)
 
-add_library(${PROJECT_NAME}_STATIC STATIC ${ORZ_INCLUDE_FILES} ${ORZ_SRC_INCLUDE_FILES} ${ORZ_SRC_FILES})
-# add_library(${PROJECT_NAME}_SHARED SHARED ${ORZ_INCLUDE_FILES} ${ORZ_SRC_INCLUDE_FILES} ${ORZ_SRC_FILES})
-# target_link_libraries(${PROJECT_NAME}_SHARED ${PROJECT_NAME}_STATIC)
-
+add_library(${PROJECT_NAME} ${ORZ_INCLUDE_FILES} ${ORZ_SRC_INCLUDE_FILES} ${ORZ_SRC_FILES})
+target_include_directories(${PROJECT_NAME} PUBLIC
+    $<BUILD_INTERFACE:${ORZ_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${ORZ_SOURCE_DIR}/src>
+    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>)
 if (ORZ_WITH_OPENSSL)
     message(STATUS "Build with OpenSSL")
-    add_definitions(-DORZ_WITH_OPENSSL)
 	find_package(OpenSSL REQUIRED)
-    include_directories(${OPENSSL_INCLUDE_DIR})
-    # target_link_libraries(${PROJECT_NAME}_SHARED ${OPENSSL_CRYPTO_LIBRARY})
-    target_link_libraries(${PROJECT_NAME}_STATIC ${OPENSSL_CRYPTO_LIBRARY})
-    # target_link_libraries(${PROJECT_NAME}_SHARED ${OPENSSL_SSL_LIBRARY})
-    target_link_libraries(${PROJECT_NAME}_STATIC ${OPENSSL_SSL_LIBRARY})
+    target_compile_definitions(${PROJECT_NAME} ORZ_WITH_OPENSSL)
+    target_link_libraries(${PROJECT_NAME} OpenSSL::SSL OpenSSL::Crypto)
 endif (ORZ_WITH_OPENSSL)
 
 if (WIN32)
     # target_link_libraries(${PROJECT_NAME}_SHARED wininet.lib)
-    target_link_libraries(${PROJECT_NAME}_STATIC wininet.lib)
+    target_link_libraries(${PROJECT_NAME} wininet.lib)
     # target_link_libraries(${PROJECT_NAME}_STATIC ole32.lib)
 elseif (APPLE)
     # target_link_libraries(${PROJECT_NAME}_SHARED pthread)
-    target_link_libraries(${PROJECT_NAME}_STATIC pthread)
+    target_link_libraries(${PROJECT_NAME} pthread)
 elseif (UNIX)
     # target_link_libraries(${PROJECT_NAME}_SHARED pthread)
-    target_link_libraries(${PROJECT_NAME}_STATIC pthread)
+    target_link_libraries(${PROJECT_NAME} pthread)
     # target_link_libraries(${PROJECT_NAME}_STATIC uuid)
 endif ()
 
-# set_target_properties(${PROJECT_NAME}_SHARED PROPERTIES OUTPUT_NAME ${PROJECT_NAME}${ENV_SUFFIX})
-set_target_properties(${PROJECT_NAME}_STATIC PROPERTIES OUTPUT_NAME ${PROJECT_NAME}_static${ENV_SUFFIX})
+export(TARGETS ${PROJECT_NAME}
+       APPEND FILE ${CMAKE_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+)
 
-if (ORZ_INSTALL)
-	install(TARGETS
-            # ${PROJECT_NAME}_SHARED
-            ${PROJECT_NAME}_STATIC
-		RUNTIME DESTINATION ${ENV_RUNTIME_DIR}
-		LIBRARY DESTINATION ${ENV_LIBRARY_DIR}
-		ARCHIVE DESTINATION ${ENV_ARCHIVE_DIR}
-	)
-	
-    install(DIRECTORY ${ORZ_INCLUDE_DIR}/orz
-		DESTINATION ${ENV_HEADER_DIR}
-	)
+string(TOLOWER ${PROJECT_NAME} LOWER_PROJECT_NAME)
+GENERATE_EXPORT_HEADER(${PROJECT_NAME})
+file(COPY ${CMAKE_CURRENT_BINARY_DIR}/${LOWER_PROJECT_NAME}_export.h
+    DESTINATION ${CMAKE_BINARY_DIR})
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    PUBLIC_HEADER "${CMAKE_CURRENT_BINARY_DIR}/${LOWER_PROJECT_NAME}_export.h" # Install head files
+    )
 
-endif (ORZ_INSTALL)
+install(TARGETS
+    ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}Config
+    RUNTIME DESTINATION ${ENV_RUNTIME_DIR}
+        COMPONENT Runtime
+    LIBRARY DESTINATION ${ENV_LIBRARY_DIR}
+        COMPONENT Runtime
+    ARCHIVE DESTINATION ${ENV_ARCHIVE_DIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/orz
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    )
+
+# Install cmake configure files
+install(
+    EXPORT ${PROJECT_NAME}Config
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/SeetaFace6"
+    NAMESPACE
+        SeetaFace6::
+    )
+write_basic_package_version_file(
+    "${CMAKE_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+    VERSION ${BUILD_VERSION}
+    COMPATIBILITY AnyNewerVersion)
+install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/SeetaFace6")
+install(DIRECTORY ${ORZ_SOURCE_DIR}/include/
+    DESTINATION ${ENV_HEADER_DIR})

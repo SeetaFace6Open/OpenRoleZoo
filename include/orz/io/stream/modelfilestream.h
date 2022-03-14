@@ -5,12 +5,11 @@
 #include "orz/io/stream/stream.h"
 #include "orz/io/jug/jug.h"
 
-
 namespace orz {
 /**
  * This class parse the json model file and sta model file to get the model file's orz::jug object
 */
-class ModelFileInputStream : public InputStream {
+class ORZ_EXPORT ModelFileInputStream : public InputStream {
 public:
     /**
      * @param file the model file path, support json and sta type.
@@ -61,7 +60,7 @@ private:
 /**
  * create model file, may is json or sta format
  */
-class ModelFileOutputStream : public OutputStream {
+class ORZ_EXPORT ModelFileOutputStream : public OutputStream {
 public:
     /**
      * @param file the model file path

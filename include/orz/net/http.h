@@ -6,6 +6,7 @@
 #define ORZ_NET_HTTP_H
 
 #include <string>
+#include "orz_export.h"
 
 namespace orz {
     namespace http {
@@ -22,7 +23,7 @@ namespace orz {
         };
     }
 
-    class URL {
+    class ORZ_EXPORT URL {
     public:
         using self  = URL;
 
@@ -49,9 +50,9 @@ namespace orz {
         bool m_valid;
     };
 
-    std::string http_request(const URL &url, http::VERB verb, const std::string &data = "");
-    std::string http_request(const URL &url, http::VERB verb, const std::string &data, header::TYPE header);
-    std::string http_request(const URL &url, http::VERB verb, const std::string &data, const std::string &header);
+    ORZ_EXPORT std::string http_request(const URL &url, http::VERB verb, const std::string &data = "");
+    ORZ_EXPORT std::string http_request(const URL &url, http::VERB verb, const std::string &data, header::TYPE header);
+    ORZ_EXPORT std::string http_request(const URL &url, http::VERB verb, const std::string &data, const std::string &header);
 }
 
 

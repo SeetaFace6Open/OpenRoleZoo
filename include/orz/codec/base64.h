@@ -6,10 +6,11 @@
 #define ORZ_CODEC_BASE64_H
 
 #include <string>
+#include "orz_export.h"
 
 namespace orz {
-    std::string base64_encode(const std::string &bin);
-    std::string base64_decode(const std::string &codes);
+    ORZ_EXPORT std::string base64_encode(const std::string &bin);
+    ORZ_EXPORT std::string base64_decode(const std::string &codes);
 }
 
 #endif //ORZ_CODEC_BASE64_H

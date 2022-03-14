@@ -6,13 +6,14 @@
 #define ORZ_TOOLS_TIMER_H
 
 #include <chrono>
+#include "orz_export.h"
 
 namespace orz {
 
     /**
      * using microseconds for timer
      */
-    class Timer {
+    class ORZ_EXPORT Timer {
     public:
         using duration = std::chrono::microseconds;
         using time_point = std::chrono::system_clock::time_point;
